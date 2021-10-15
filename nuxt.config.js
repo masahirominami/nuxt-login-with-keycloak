@@ -79,14 +79,10 @@ export default {
       keycloak: {
         scheme: 'oauth2',
         endpoints: {
-          authorization: `${process.env.KEYCLOAK_HOST}/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/auth`,
-          userInfo: `${process.env.KEYCLOAK_HOST}/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/userinfo`,
-          token: `${process.env.KEYCLOAK_HOST}/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/token`,
-          logout: `${process.env.KEYCLOAK_HOST}/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/logout?redirect_uri=` + encodeURIComponent(String(process.env.HOME_URI))
-//          authorization: '/auth/realms/demo/protocol/openid-connect/auth',
-//          token: '/auth/realms/demo/protocol/openid-connect/token',
-//          userInfo: '/auth/realms/demo/protocol/openid-connect/userinfo',
-//          logout: '/auth/realms/demo/protocol/openid-connect/logout?redirect_uri=' + encodeURIComponent('https://localhost:3000')
+          authorization: `${process.env.KEYCLOAK_HOST}/auth/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/auth`,
+          userInfo: `${process.env.KEYCLOAK_HOST}/auth/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/userinfo`,
+          token: `${process.env.KEYCLOAK_HOST}/auth/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/token`,
+          logout: `${process.env.KEYCLOAK_HOST}/auth/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/logout?redirect_uri=` + encodeURIComponent(String(process.env.HOME_URI))
         },
         token: {
           property: 'access_token',
@@ -114,7 +110,7 @@ export default {
 
   proxy: {
     '/auth': {
-      target: 'https://keycloak.minamirnd.work'
+      target: '${process.env.KEYCLOAK_HOST}'
     }
   },
 
